@@ -1,0 +1,6 @@
+*.o
+*.hi
+*~
+Mandelbulb
+hglmandel
+02_Edges/HGLMandelEdge

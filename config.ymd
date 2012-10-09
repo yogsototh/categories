@@ -1,0 +1,21 @@
+-----
+isHidden:       false
+menupriority:   1
+kind:           article
+created_at:     2012-10-01T19:16:43+02:00
+en: title: Categeory Theory Programming
+fr: title: Programmation en Théorie des Catégories
+author_name: Yann Esposito
+author_uri: yannesposito.com
+tags:
+  - Haskell
+  - programming
+  - functional
+  - category theory
+-----
+
+begindiv(intro)
+
+en: %tldr How to program using category theory.
+fr: %tlal Comment programmer en utilisant la théorie des catégories.
+
