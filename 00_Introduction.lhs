@@ -131,8 +131,12 @@ AC -> C
 
 </graph>
 
-On this little graph things are already complex.
-Let just double the morphisms between different objects.
+Now we have a complete representation.
+We don't have to represent \\(idX\\), we know there are there.
+And we also don't have to represent composition implying \\(idX\\) morphisms.
+But, even this little graph look complex.
+To show just how complex things can be;
+we just double the number morphisms between different objects.
 
 <graph title="Naïve Category Representation Mess">
 
@@ -159,21 +163,21 @@ fpgp[label="", fixedsize="false", width=0,height=0,shape=none];
 AC[label="", fixedsize="false", width=0,height=0,shape=none];
 ApCp[label="", fixedsize="false", width=0,height=0,shape=none];
 
-f -> fg  [color="#dc322f",style=dashed,arrowhead=None]
-fg -> g  [color="#dc322f",style=dashed,arrowhead=None]
-fg -> AC [color="#dc322f",style=bold,label="h=g∘f"]
+f -> fg  [color="#b58900",style=dashed,arrowhead=None]
+fg -> g  [color="#b58900",style=dashed,arrowhead=None]
+fg -> AC [color="#b58900",style=bold,label="h=g∘f"]
 
 fp -> fpgp [color="#d33682",style=dashed,arrowhead=None]
 fpgp -> gp [color="#d33682",style=dashed,arrowhead=None]
 fpgp -> AC [color="#d33682",style=bold,label="h=g'∘f'"]
 
-fp -> fpg   [color="#268bd2",style=dashed,arrowhead=None]
-fpg -> g    [color="#268bd2",style=dashed,arrowhead=None]
-fpg -> ApCp [color="#268bd2",style=bold,label="h'=g∘f'"]
+fp -> fpg   [color="#dc322f",style=dashed,arrowhead=None]
+fpg -> g    [color="#dc322f",style=dashed,arrowhead=None]
+fpg -> ApCp [color="#dc322f",style=bold,label="h'=g∘f'"]
 
-f -> fgp    [color="#b58900",style=dashed,arrowhead=None]
-fgp -> gp   [color="#b58900",style=dashed,arrowhead=None]
-fgp -> ApCp [color="#b58900",style=bold,label="h'=g'∘f"]
+f -> fgp    [color="#268bd2",style=dashed,arrowhead=None]
+fgp -> gp   [color="#268bd2",style=dashed,arrowhead=None]
+fgp -> ApCp [color="#268bd2",style=bold,label="h'=g'∘f"]
 
 A -> AC [label="h",arrowhead=None]
 AC -> C
