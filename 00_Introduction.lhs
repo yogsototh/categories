@@ -95,7 +95,7 @@ C -> C [label="idC"]
 
 From this graph we can conclude without any ambiguity that:
 
-\\[ob(C)={A,B,C}\\]
+\\[ob(C)=\\{A,B,C\\}\\]
 and
 \\[\hom(C)=\\{f,g,h,idA,idB,idC\\}\\]
 
@@ -117,15 +117,17 @@ g[label="", fixedsize="false", width=0,height=0,shape=none];
 B -> g[label="g", arrowhead=None]
 g -> C
 
-fg[label="", fixedsize="false", width=0,height=0,shape=none];
-AC[label="", fixedsize="false", width=0,height=0,shape=none];
 
-f -> fg [style=dashed,arrowhead=None]
-fg -> g [style=dashed,arrowhead=None]
-A -> AC [label="g∘f",arrowhead=None]
+fg      [label="", fixedsize="false", width=0,height=0,shape=none];
+AC      [label="", fixedsize="false", width=0,height=0,shape=none];
+
+f -> fg  [color="#b58900",style=dashed,arrowhead=None]
+fg -> g  [color="#b58900",style=dashed,arrowhead=None]
+fg -> AC [label="h=g∘f",colorlabel="#b58900",color="#b58900",style=bold]
+
+A -> AC [label="h",arrowhead=None]
 AC -> C
 
-fg -> AC [style=bold]
 
 </graph>
 
@@ -154,31 +156,30 @@ fg[label="", fixedsize="false", width=0,height=0,shape=none];
 fpg[label="", fixedsize="false", width=0,height=0,shape=none];
 fgp[label="", fixedsize="false", width=0,height=0,shape=none];
 fpgp[label="", fixedsize="false", width=0,height=0,shape=none];
-
 AC[label="", fixedsize="false", width=0,height=0,shape=none];
 ApCp[label="", fixedsize="false", width=0,height=0,shape=none];
 
-f -> fg [style=dashed,arrowhead=None]
-fg -> g [style=dashed,arrowhead=None]
+f -> fg  [color="#dc322f",style=dashed,arrowhead=None]
+fg -> g  [color="#dc322f",style=dashed,arrowhead=None]
+fg -> AC [color="#dc322f",style=bold,label="h=g∘f"]
 
-fp -> fpg [style=dashed,arrowhead=None]
-fpg -> g [style=dashed,arrowhead=None]
+fp -> fpgp [color="#d33682",style=dashed,arrowhead=None]
+fpgp -> gp [color="#d33682",style=dashed,arrowhead=None]
+fpgp -> AC [color="#d33682",style=bold,label="h=g'∘f'"]
 
-f -> fgp [style=dashed,arrowhead=None]
-fgp -> gp [style=dashed,arrowhead=None]
+fp -> fpg   [color="#268bd2",style=dashed,arrowhead=None]
+fpg -> g    [color="#268bd2",style=dashed,arrowhead=None]
+fpg -> ApCp [color="#268bd2",style=bold,label="h'=g∘f'"]
 
-fp -> fpgp [style=dashed,arrowhead=None]
-fpgp -> gp [style=dashed,arrowhead=None]
+f -> fgp    [color="#b58900",style=dashed,arrowhead=None]
+fgp -> gp   [color="#b58900",style=dashed,arrowhead=None]
+fgp -> ApCp [color="#b58900",style=bold,label="h'=g'∘f"]
 
-A -> AC [label="h=g∘f=g'∘f'",arrowhead=None]
+A -> AC [label="h",arrowhead=None]
 AC -> C
 
-A -> ApCp [label="h'=g'∘f=g∘f'",arrowhead=None]
+A -> ApCp [label="h'",arrowhead=None]
 ApCp -> C
 
-fg -> AC [style=bold]
-fpgp -> AC [style=bold]
-fpg -> ApCp [style=bold]
-fgp -> ApCp [style=bold]
 
 </graph>
