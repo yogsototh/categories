@@ -222,6 +222,7 @@ A -> C [label="h'\n=g'∘f\n=g∘f'"]
  ### Examples
 
 Which can be a valid category by choosing ∘ appropriately?
+The identity morphisms are assumed.
 
 <graph title="Can be a valid category">
 A[label="★"]
@@ -251,8 +252,11 @@ A -> C
 </graph>
 
 <graph title="Not a category; no \(A→C\) while there exists \(A→B\) and \(B→C\)">
-A -> B [constraint=false]
-B -> C [constraint=false]
+A[pos="0,0"]
+B[pos="2,0"]
+C[pos="1,-1"]
+A -> B
+B -> C
 B -> A
 C -> A
 </graph>
