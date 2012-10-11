@@ -71,6 +71,21 @@ And will discuss about some categories.
  > - for all triplet of morphisms \\(h:A->B\\), \\(g:B->C\\) and \\(f:C->D\\)  
  >   \\( (f∘g)∘h = f∘(g∘h) \\)
 
+<graph title="Identity is left and right neutral element for ∘">
+A -> A [label="idA"]
+B -> B [label="idB"]
+A -> B [label="f∘idA=f=idB∘f"]
+</graph>
+
+<graph title="Associativity">
+A -> B [label="f"]
+B -> C [label="g"]
+C -> D [label="h"]
+A -> C [label="g∘f",style="bold",fontcolor="cyan",color="cyan"]
+B -> D [label="h∘g",style="bold",fontcolor="yellow",color="yellow"]
+A -> D [label="(h∘g)∘f=h∘(g∘f)",style="bold",color="red",fontcolor="red"]
+</graph>
+
  ### Representation of Category
 
 Representing Category is not just a game.
@@ -121,9 +136,9 @@ g -> C
 fg      [label="", fixedsize="false", width=0,height=0,shape=none];
 AC      [label="", fixedsize="false", width=0,height=0,shape=none];
 
-f -> fg  [color="#b58900",style=dashed,arrowhead=None]
-fg -> g  [color="#b58900",style=dashed,arrowhead=None]
-fg -> AC [label="h=g∘f",colorlabel="#b58900",color="#b58900",style=bold]
+f -> fg  [color="red",style=dashed,arrowhead=None]
+fg -> g  [color="red",style=dashed,arrowhead=None]
+fg -> AC [label="h=g∘f",fontcolor="red",color="red",style=bold]
 
 A -> AC [label="h",arrowhead=None]
 AC -> C
@@ -140,44 +155,47 @@ we just double the number morphisms between different objects.
 
 <graph title="Naïve Category Representation Mess">
 
-f[label="", fixedsize="false", width=0,height=0,shape=none];
+A[pos="0,0!"]
+B[pos="4,0!"]
+C[pos="8,0!"]
+f[pos="2,1!",label="", fixedsize="false", width=0,height=0,shape=none];
 A -> f[label="f", arrowhead=None]
 f -> B
 
-fp[label="", fixedsize="false", width=0,height=0,shape=none];
+fp[pos="2,0.5!",label="", fixedsize="false", width=0,height=0,shape=none];
 A -> fp[label="f'", arrowhead=None]
 fp -> B
 
-g[label="", fixedsize="false", width=0,height=0,shape=none];
+g[pos="6,0.5!",label="", fixedsize="false", width=0,height=0,shape=none];
 B -> g[label="g", arrowhead=None]
 g -> C
 
-gp[label="", fixedsize="false", width=0,height=0,shape=none];
+gp[pos="6,1!",label="", fixedsize="false", width=0,height=0,shape=none];
 B -> gp[label="g'", arrowhead=None]
 gp -> C
 
-fg[label="", fixedsize="false", width=0,height=0,shape=none];
-fpg[label="", fixedsize="false", width=0,height=0,shape=none];
-fgp[label="", fixedsize="false", width=0,height=0,shape=none];
-fpgp[label="", fixedsize="false", width=0,height=0,shape=none];
-AC[label="", fixedsize="false", width=0,height=0,shape=none];
-ApCp[label="", fixedsize="false", width=0,height=0,shape=none];
+fg[pos="6,0!",label="", fixedsize="false", width=0,height=0,shape=none];
+fpg[pos="2.5,-1.5!",label="", fixedsize="false", width=0,height=0,shape=none];
+fgp[pos="5.5,-1.5!",label="", fixedsize="false", width=0,height=0,shape=none];
+fpgp[pos="2,0!",label="", fixedsize="false", width=0,height=0,shape=none];
+AC[pos="4,-1!",label="", fixedsize="false", width=0,height=0,shape=none];
+ApCp[pos="4,-3!",label="", fixedsize="false", width=0,height=0,shape=none];
 
-f -> fg  [color="#b58900",style=dashed,arrowhead=None]
-fg -> g  [color="#b58900",style=dashed,arrowhead=None]
-fg -> AC [color="#b58900",style=bold,label="h=g∘f"]
+f -> fg  [color="red",style=dashed,arrowhead=None]
+fg -> g  [color="red",style=dashed,arrowhead=None]
+fg -> AC [color="red",style=bold,fontcolor="red",label="h=g∘f"]
 
-fp -> fpgp [color="#d33682",style=dashed,arrowhead=None]
-fpgp -> gp [color="#d33682",style=dashed,arrowhead=None]
-fpgp -> AC [color="#d33682",style=bold,label="h=g'∘f'"]
+fp -> fpgp [color="yellow",style=dashed,arrowhead=None]
+fpgp -> gp [color="yellow",style=dashed,arrowhead=None]
+fpgp -> AC [color="yellow",style=bold,fontcolor="yellow",label="h=g'∘f'"]
 
-fp -> fpg   [color="#dc322f",style=dashed,arrowhead=None]
-fpg -> g    [color="#dc322f",style=dashed,arrowhead=None]
-fpg -> ApCp [color="#dc322f",style=bold,label="h'=g∘f'"]
+fp -> fpg   [color="blue",style=dashed,arrowhead=None]
+fpg -> g    [color="blue",style=dashed,arrowhead=None]
+fpg -> ApCp [color="blue",style=bold,fontcolor="blue",label="h'=g∘f'"]
 
-f -> fgp    [color="#268bd2",style=dashed,arrowhead=None]
-fgp -> gp   [color="#268bd2",style=dashed,arrowhead=None]
-fgp -> ApCp [color="#268bd2",style=bold,label="h'=g'∘f"]
+f -> fgp    [color="violet",style=dashed,arrowhead=None]
+fgp -> gp   [color="violet",style=dashed,arrowhead=None]
+fgp -> ApCp [color="violet",style=bold,fontcolor="violet",label="h'=g'∘f"]
 
 A -> AC [label="h",arrowhead=None]
 AC -> C
@@ -188,16 +206,102 @@ ApCp -> C
 
 </graph>
 
-In fact we could have made something equivalent and far easier to read.
-But the ∘ relation will be more hidden.
+By removing the graphical representation of ∘ we could create a more readable representation.
 
-<graph title="Less Graphic Category Representation">
+<graph title="Fewer Details Category Representation">
 
 A -> B[label="f"]
 A -> B[label="f'"]
 B -> C[label="g"]
 B -> C[label="g'"]
-A -> C [label="h=g∘f=g'∘f'"]
-A -> C [label="h'=g'∘f=g∘f'"]
+A -> C [label="h\n=g∘f\n=g'∘f'"]
+A -> C [label="h'\n=g'∘f\n=g∘f'"]
+
+</graph>
+
+ ### Examples
+
+Which can be a valid category by choosing ∘ appropriately?
+
+<graph title="Can be a valid category">
+A[label="★"]
+B[label="★"]
+C[label="★"]
+A -> B
+B -> C
+A -> C [constraint=false]
+</graph>
+
+<graph title="Not a category; think about \(g∘f\).">
+A[label="★"]
+B[label="★"]
+C[label="★"]
+A -> B[label="f"]
+B -> C[label="g"]
+</graph>
+
+<graph title="Also a valid category">
+A[label="★",pos="0,50"]
+B[label="★",pos="50,50"]
+C[label="★",pos="25,0"]
+A -> B
+B -> A
+B -> C
+A -> C
+</graph>
+
+<graph title="Not a category; no \(A→C\) while there exists \(A→B\) and \(B→C\)">
+A -> B [constraint=false]
+B -> C [constraint=false]
+B -> A
+C -> A
+</graph>
+
+<graph title="Not a category; \((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
+A -> B[label="g"]
+B -> A[label="f"]
+B -> A[label="h"]
+</graph>
+
+To continue to gain some intuition I will give some degenerated Category examples.
+
+ ### Monoids
+
+What are Monoids?
+Things that you can operate a list of in any evaluation order and obtain the same result.
+
+More precisely; let `l` be a list of elements of the monoid.
+then
+
+<code class="haskell">
+foldl (<>) e l = foldr (<>) e l
+</code>
+
+Where `(<>)` is the monoid operation.
+And `e` is the neutral element of the monoid.
+Equivalently:
+
+<code class="haskell">
+((e <> x) <> y) <> z = x <> ( y <> ( z <> e) )
+</code>
+
+Or another way of saying it is that `x <> y <> z` doesn't need any parenthesis.
+Because whatever the order of evaluation the result will be the same.
+
+Typical examples:
+
+- `String` with `(++)` and `""`
+- `Lists` with `(++)` and `[]`
+- `Data.Text` with `append` and `empty`
+- `Integer` with `(+)` and `0`
+- `Integer` with `(*)` and `1`
+- Generalized by `Monoid a` with `(<>)` and `mempty`
+
+<graph title="Strings are Categories">
+
+★ -> ★[label="e"]
+★ -> ★[label="x"]
+★ -> ★[label="y"]
+★ -> ★[label="..."]
 
 </graph>
