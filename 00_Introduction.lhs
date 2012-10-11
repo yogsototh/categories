@@ -187,3 +187,17 @@ ApCp -> C
 
 
 </graph>
+
+In fact we could have made something equivalent and far easier to read.
+But the ∘ relation will be more hidden.
+
+<graph title="Less Graphic Category Representation">
+
+A -> B[label="f"]
+A -> B[label="f'"]
+B -> C[label="g"]
+B -> C[label="g'"]
+A -> C [label="h=g∘f=g'∘f'"]
+A -> C [label="h'=g'∘f=g∘f'"]
+
+</graph>
