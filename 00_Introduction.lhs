@@ -81,9 +81,9 @@ A -> B [label="f∘idA=f=idB∘f"]
 A -> B [label="f"]
 B -> C [label="g"]
 C -> D [label="h"]
-A -> C [label="g∘f",style="bold",fontcolor="cyan",color="cyan"]
-B -> D [label="h∘g",style="bold",fontcolor="yellow",color="yellow"]
-A -> D [label="(h∘g)∘f=h∘(g∘f)",style="bold",color="red",fontcolor="red"]
+A -> C [label="g∘f",style="bold",fontcolor="cyan",color="cyan",constraint="false"]
+B -> D [label="h∘g",style="bold",fontcolor="yellow",color="yellow",constraint="false"]
+A -> D [label="(h∘g)∘f=h∘(g∘f)",style="bold",color="red",fontcolor="red",constraint="false"]
 </graph>
 
  ### Representation of Category
@@ -124,17 +124,21 @@ We simply add a relation between 3 arrows that represent the composition.
 
 <graph title="Naïve Category Representation">
 
-f[label="", fixedsize="false", width=0,height=0,shape=none];
+A[pos="0,0!"]
+B[pos="1.5,1.5!"]
+C[pos="3,0!"]
+
+f[pos="0.75,0.75!",label="", fixedsize="false", width=0,height=0,shape=none];
 A -> f[label="f", arrowhead=None]
 f -> B
 
-g[label="", fixedsize="false", width=0,height=0,shape=none];
+g[pos="2.25,0.75!",label="", fixedsize="false", width=0,height=0,shape=none];
 B -> g[label="g", arrowhead=None]
 g -> C
 
 
-fg      [label="", fixedsize="false", width=0,height=0,shape=none];
-AC      [label="", fixedsize="false", width=0,height=0,shape=none];
+fg      [pos="1.5,0.75!",label="", fixedsize="false", width=0,height=0,shape=none];
+AC      [pos="1.5,0!",label="", fixedsize="false", width=0,height=0,shape=none];
 
 f -> fg  [color="red",style=dashed,arrowhead=None]
 fg -> g  [color="red",style=dashed,arrowhead=None]
@@ -233,7 +237,7 @@ B -> C
 A -> C [constraint=false]
 </graph>
 
-<graph title="Not a category; think about \(g∘f\).">
+<graph title="Cannot be a category; no candidate for \(g∘f\).">
 A[label="★"]
 B[label="★"]
 C[label="★"]
@@ -261,7 +265,7 @@ B -> A
 C -> A
 </graph>
 
-<graph title="Not a category; \((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
+<graph title="Cannot be a category ; no possible associative ∘<br/>\((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
 A -> B[label="g"]
 B -> A[label="f"]
 B -> A[label="h"]
@@ -309,3 +313,11 @@ Typical examples:
 ★ -> ★[label="..."]
 
 </graph>
+
+metapost test
+
+<mpost title="metapost test">
+pair A, B, C;
+A:=(0,0); B:=(1cm,0); C:=(0,1cm);
+draw A--B--C;
+</mpost>
