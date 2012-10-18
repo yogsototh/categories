@@ -60,7 +60,7 @@ And will discuss about some categories.
  > - For every pair of objects \\((A,B)\\) a set \\(\hom(A,B)\\)
  >   of _morphisms_ \\(f:A→B\\) (Another notation for \\(f\in \hom(A,B)\\))
  > - A composition operator \\(∘\\)
- >   which associate to each couple \\(g:A→B\\), \\(f:B→C\\) another morphism \\(f∘g:A→C\\).
+ >   which associate to each couple \\(f:A→B\\), \\(g:B→C\\) another morphism \\(g∘f:A→C\\).
  >
  > With the following properties
  >
@@ -68,23 +68,45 @@ And will discuss about some categories.
  >   \\(id_x:x→x\\)  
  >   s.t. for any morphism \\(f:A->B\\),  
  >   \\(id_A∘f = f = f∘id_B\\)
- > - for all triplet of morphisms \\(h:A->B\\), \\(g:B->C\\) and \\(f:C->D\\)  
- >   \\( (f∘g)∘h = f∘(g∘h) \\)
+ > - for all triplet of morphisms \\(f:A->B\\), \\(g:B->C\\) and \\(h:C->D\\)  
+ >   \\( (h∘g)∘f = h∘(g∘f) \\)
+<mpost title="Identity is left and right neutral element for ∘">
+z0=origin;
+z1=(2gu,0);
 
-<graph title="Identity is left and right neutral element for ∘">
-A -> A [label="idA"]
-B -> B [label="idB"]
-A -> B [label="f∘idA=f=idB∘f"]
-</graph>
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
 
-<graph title="Associativity">
-A -> B [label="f"]
-B -> C [label="g"]
-C -> D [label="h"]
-A -> C [label="g∘f",style="bold",fontcolor="cyan",color="cyan",constraint="false"]
-B -> D [label="h∘g",style="bold",fontcolor="yellow",color="yellow",constraint="false"]
-A -> D [label="(h∘g)∘f=h∘(g∘f)",style="bold",color="red",fontcolor="red",constraint="false"]
-</graph>
+drawLoop(z0,btex $id_A$ etex);
+drawLoop(z1,btex $id_B$ etex);
+
+drawEdge(z0,z1,btex $f\circ id_A = f = id_B\circ f$ etex);
+</mpost>
+
+<mpost title="Associativity">
+z0=origin;
+z1=(gu,0);
+z2=(2gu,0);
+z3=(3gu,0);
+
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawState(z2,btex $C$ etex);
+drawState(z3,btex $D$ etex);
+
+drawEdge(z0,z1,btex $f$ etex);
+drawEdge(z1,z2,btex $g$ etex);
+drawEdge(z2,z3,btex $h$ etex);
+
+drawoptions(withcolor blue);
+drawEdgeWithAngle(z0,z2,btex $g\circ f$ etex,30);
+
+drawoptions(withcolor yellow);
+drawEdgeWithAngle(z1,z3,btex $h\circ g$ etex,-30);
+
+drawoptions(withcolor red);
+drawEdgeWithAngle(z0,z3,btex $(h\circ g)\circ f = h\circ (g\circ f)$ etex,45);
+</mpost>
 
  ### Representation of Category
 
@@ -96,17 +118,24 @@ A naïve representation (which can work in many cases) is to represent
 a specific category as a directed graph.
 Here is a first example of the representation of a category:
 
-<graph title="First Naïve Category Representation">
+<mpost title="First Naïve Category Representation">
+z0=origin;
+z1=2/3(gu,gu);
+z2=(4/3gu,0);
 
-A -> B [label="f"]
-B -> C [label="g"]
-A -> C [label="h"]
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawState(z2,btex $C$ etex);
 
-A -> A [label="idA"]
-B -> B [label="idB"]
-C -> C [label="idC"]
+drawEdge(z0,z1,btex $f$ etex);
+drawEdge(z1,z2,btex $g$ etex);
+drawEdge(z0,z2,btex $h$ etex);
 
-</graph>
+drawLoop(z0,btex $id_A$ etex);
+drawLoop(z1,btex $id_B$ etex);
+drawLoop(z2,btex $id_C$ etex);
+
+</mpost>
 
 From this graph we can conclude without any ambiguity that:
 
@@ -122,33 +151,35 @@ What is \\(∘\\)?
 Now, we can add informations to our previous representation.
 We simply add a relation between 3 arrows that represent the composition.
 
-<graph title="Naïve Category Representation">
+<mpost title="Naïve Category Representation">
+z0=origin;
+z1=(gu,gu);
+z2=(2gu,0);
 
-A[pos="0,0!"]
-B[pos="1.5,1.5!"]
-C[pos="3,0!"]
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawState(z2,btex $C$ etex);
 
-f[pos="0.75,0.75!",label="", fixedsize="false", width=0,height=0,shape=none];
-A -> f[label="f", arrowhead=None]
-f -> B
+drawEdge(z0,z1,btex $f$ etex);
+drawEdge(z1,z2,btex $g$ etex);
+drawEdge(z0,z2,btex $h$ etex);
 
-g[pos="2.25,0.75!",label="", fixedsize="false", width=0,height=0,shape=none];
-B -> g[label="g", arrowhead=None]
-g -> C
+drawoptions( withcolor red );
 
+z3=.6[z0,z1];
+z4=.6[z2,z1];
 
-fg      [pos="1.5,0.75!",label="", fixedsize="false", width=0,height=0,shape=none];
-AC      [pos="1.5,0!",label="", fixedsize="false", width=0,height=0,shape=none];
+draw z3 -- z4 dashed evenly;
 
-f -> fg  [color="red",style=dashed,arrowhead=None]
-fg -> g  [color="red",style=dashed,arrowhead=None]
-fg -> AC [label="h=g∘f",fontcolor="red",color="red",style=bold]
+z5 = .45[z3,z4];
+z6 = .55[z0,z2];
+path bigarrow;
+bigarrow := subpath (.1,.9) of z5 -- z6;
+drawarrow bigarrow  withpen pencircle scaled 1.5;
 
-A -> AC [label="h",arrowhead=None]
-AC -> C
+label.rt(btex $h = g \circ f$ etex, .5[z5,z6]);
 
-
-</graph>
+</mpost>
 
 Now we have a complete representation.
 We don't have to represent \\(idX\\), we know there are there.
@@ -228,42 +259,49 @@ A -> C [label="h'\n=g'∘f\n=g∘f'"]
 Which can be a valid category by choosing ∘ appropriately?
 The identity morphisms are assumed.
 
-<graph title="Can be a valid category">
-A[label="★"]
-B[label="★"]
-C[label="★"]
-A -> B
-B -> C
-A -> C [constraint=false]
-</graph>
+<mpost title="This can be a valid category">
+z0=(0,0);
+z1=2(u,0);
+z2=2(2u,0);
 
-<graph title="Cannot be a category; no candidate for \(g∘f\).">
-A[label="★"]
-B[label="★"]
-C[label="★"]
-A -> B[label="f"]
-B -> C[label="g"]
-</graph>
+drawedge(z0,z1,"");
+drawedge(z1,z2,"");
+drawedgeangle(z0,z2,"",50);
 
-<graph title="Also a valid category">
-A[label="★",pos="0,50"]
-B[label="★",pos="50,50"]
-C[label="★",pos="25,0"]
-A -> B
-B -> A
-B -> C
-A -> C
-</graph>
+drawstate(z0);
+drawstate(z1);
+drawstate(z2);
+</mpost>
 
-<graph title="Not a category; no \(A→C\) while there exists \(A→B\) and \(B→C\)">
-A[pos="0,0"]
-B[pos="2,0"]
-C[pos="1,-1"]
-A -> B
-B -> C
-B -> A
-C -> A
-</graph>
+<mpost title="Cannot be a category; no candidate for g∘f.">
+z0=(0,0); z1=3(u,0); z2=3(2u,0);
+drawstate(z0); drawstate(z1); drawstate(z2);
+
+drawedge(z0,z1,btex $f$ etex);
+drawedge(z1,z2,btex $g$ etex);
+</mpost>
+
+<mpost title="Also a possible valid category">
+z0=(0,0); z1=(4u,0); z2=(2u,-3u);
+drawstate(z0); drawstate(z1); drawstate(z2);
+
+drawedgeangle(z0,z1,"",35);
+drawedgeangle(z1,z0,"",-145);
+drawedge(z0,z2,"");
+drawedge(z1,z2,"");
+</mpost>
+
+<mpost title="Not a category; no \(A→C\) while there exists \(A→B\) and \(B→C\)">
+z0=(0,0); z1=(gu,0); z2=(.5gu,-.75gu);
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawState(z2,btex $C$ etex);
+
+drawEdgeWithAngle(z0,z1,"",35);
+drawEdgeWithAngle(z1,z0,"",-145);
+drawEdge(z1,z2,"");
+drawEdge(z2,z0,"");
+</mpost>
 
 <graph title="Cannot be a category ; no possible associative ∘<br/>\((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
 A -> B[label="g"]
@@ -305,19 +343,33 @@ Typical examples:
 - `Integer` with `(*)` and `1`
 - Generalized by `Monoid a` with `(<>)` and `mempty`
 
-<graph title="Strings are Categories">
+<mpost title="Strings are Categories">
+u:=.5cm;
+def drawloop(expr a,b,l) =
+    pair ba,ea;
+    path circ,p,s;
+    p:=a{1,1}..b..{1,-1}cycle;
+    circ:= fullcircle scaled 6 shifted a;
+    ba = circ intersectionpoint (subpath (0,1) of p);
+    ea = circ intersectionpoint (subpath (1,2) of p);
+    s:= ba{1,1}..b..{1,-1}ea;
+    drawarrow s;
+    label.top(l,b);
+enddef;
 
-★ -> ★[label="e"]
-★ -> ★[label="x"]
-★ -> ★[label="y"]
-★ -> ★[label="..."]
+pair A,B,C,D,E,F;
+A:=(0,0);
+B:=(0,u);
+C:=(0,2u);
+D:=(0,3u);
+E:=(0,4u);
+F:=(0,6u);
 
-</graph>
-
-metapost test
-
-<mpost title="metapost test">
-pair A, B, C;
-A:=(0,0); B:=(1cm,0); C:=(0,1cm);
-draw A--B--C;
+drawloop(A,B,btex $\varepsilon$ etex);
+drawloop(A,C,btex $a$ etex);
+drawloop(A,D,btex $b$ etex);
+drawloop(A,E,btex $ab$ etex);
+drawloop(A,F,btex $\omega$ etex);
+draw (0,4.8u)--(0,5.8u) dashed withdots;
+draw A withpen pencircle scaled 4bp;
 </mpost>
