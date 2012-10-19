@@ -174,8 +174,8 @@ draw z3 -- z4 dashed evenly;
 z5 = .45[z3,z4];
 z6 = .55[z0,z2];
 path bigarrow;
-bigarrow := subpath (.1,.9) of z5 -- z6;
-drawarrow bigarrow  withpen pencircle scaled 1.5;
+bigarrow := shorten(z5--z6,2bp);
+drawarrow bigarrow withpen pencircle scaled 1.5;
 
 label.rt(btex $h = g \circ f$ etex, .5[z5,z6]);
 
@@ -197,9 +197,9 @@ drawState(z0,btex $A$ etex);
 drawState(z1,btex $B$ etex);
 drawState(z2,btex $C$ etex);
 
-drawEdgeWithAngle(z0,z1,btex $f$ etex,35);
+drawEdgeWithAngle(z0,z1,btex $f$ etex,45);
 drawEdge(z0,z1,btex $f'$ etex);
-drawEdgeWithAngle(z1,z2,btex $g$ etex,35);
+drawEdgeWithAngle(z1,z2,btex $g$ etex,45);
 drawEdge(z1,z2,btex $g'$ etex);
 drawEdgeWithAngle(z0,z2,btex $h$ etex,-10);
 drawEdgeWithAngle(z0,z2,btex $h'$ etex,-35);
@@ -216,7 +216,7 @@ def drawLink(expr f,g,h,l,propf,propg,proph,propfg) =
         midfg = point propfg of fg;
         midh = point proph of h;
         path bigarrow;
-        bigarrow := subpath (.1,.9) of midfg .. midh;
+        bigarrow := shorten (midfg .. midh,2bp);
         drawarrow bigarrow  withpen pencircle scaled 1.5;
 
         label.rt(l, point .5 of bigarrow);
@@ -225,9 +225,9 @@ enddef;
 
 path f,fp,g,gp,h,hp;
 
-f=edgeAngle(z0,z1,35);
+f=edgeAngle(z0,z1,45);
 fp=edge(z0,z1);
-g=edgeAngle(z1,z2,35);
+g=edgeAngle(z1,z2,45);
 gp=edge(z1,z2);
 h=edgeAngle(z0,z2,-10);
 hp=edgeAngle(z0,z2,-35);
@@ -255,9 +255,9 @@ drawState(z0,btex $A$ etex);
 drawState(z1,btex $B$ etex);
 drawState(z2,btex $C$ etex);
 
-drawEdgeWithAngle(z0,z1,btex $f$ etex,35);
+drawEdgeWithAngle(z0,z1,btex $f$ etex,45);
 drawEdge(z0,z1,btex $f'$ etex);
-drawEdgeWithAngle(z1,z2,btex $g$ etex,35);
+drawEdgeWithAngle(z1,z2,btex $g$ etex,45);
 drawEdge(z1,z2,btex $g'$ etex);
 drawEdgeWithAngle(z0,z2,btex $h=g\circ f=g'\circ f'$ etex,-10);
 drawEdgeWithAngle(z0,z2,btex $h'=g\circ f'=g'\circ f$ etex,-35);
@@ -359,26 +359,9 @@ Typical examples:
 - Generalized by `Monoid a` with `(<>)` and `mempty`
 
 <mpost title="Strings are Categories">
-u:=.5cm;
-def drawloop(expr a,b,l) =
-    pair ba,ea;
-    path circ,p,s;
-    p:=a{1,1}..b..{1,-1}cycle;
-    circ:= fullcircle scaled 6 shifted a;
-    ba = circ intersectionpoint (subpath (0,1) of p);
-    ea = circ intersectionpoint (subpath (1,2) of p);
-    s:= ba{1,1}..b..{1,-1}ea;
-    drawarrow s;
-    label.top(l,b);
-enddef;
-
 pair A,B,C,D,E,F;
-A:=(0,0);
-B:=(0,u);
-C:=(0,2u);
-D:=(0,3u);
-E:=(0,4u);
-F:=(0,6u);
+A:=(0,0); B:=(0,u); C:=(0,2u);
+D:=(0,3u); E:=(0,4u); F:=(0,6u);
 
 drawloop(A,B,btex $\varepsilon$ etex);
 drawloop(A,C,btex $a$ etex);
