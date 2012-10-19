@@ -273,9 +273,9 @@ z0=(0,0);
 z1=2(u,0);
 z2=2(2u,0);
 
-draw edge(z0,z1);
-draw edge(z1,z2);
-draw edgeAngle(z0,z2,50);
+drawarrow nl_edge(z0,z1);
+drawarrow nl_edge(z1,z2);
+drawarrow nl_edgeAngle(z0,z2,50);
 
 drawstate(z0);
 drawstate(z1);
@@ -294,10 +294,10 @@ drawedge(z1,z2,btex $g$ etex);
 z0=(0,0); z1=(4u,0); z2=(2u,-3u);
 drawstate(z0); drawstate(z1); drawstate(z2);
 
-draw nl_edgeAngle(z0,z1,35);
-draw nl_edgeAngle(z1,z0,-145);
-draw edge(z0,z2);
-draw edge(z1,z2);
+drawarrow nl_edgeAngle(z0,z1,35);
+drawarrow nl_edgeAngle(z1,z0,-145);
+drawarrow nl_edge(z0,z2);
+drawarrow nl_edge(z1,z2);
 </mpost>
 
 <mpost title="Not a category; no \(A→C\) while there exists \(A→B\) and \(B→C\)">
@@ -306,17 +306,23 @@ drawState(z0,btex $A$ etex);
 drawState(z1,btex $B$ etex);
 drawState(z2,btex $C$ etex);
 
-draw edgeAngle(z0,z1,35);
-draw edgeAngle(z1,z0,-145);
-draw edge(z1,z2);
-draw edge(z2,z0);
+drawarrow edgeAngle(z0,z1,35);
+drawarrow edgeAngle(z1,z0,-145);
+drawarrow edge(z1,z2);
+drawarrow edge(z2,z0);
 </mpost>
 
-<graph title="Cannot be a category ; no possible associative ∘<br/>\((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
-A -> B[label="g"]
-B -> A[label="f"]
-B -> A[label="h"]
-</graph>
+
+<mpost title="Cannot be a category ; no possible associative ∘<br/>\((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
+z0=origin;
+z1=(gu,0);
+
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawEdgeWithAngle(z1,z0,btex $f$ etex,145);
+drawEdge(z0,z1,btex $g$ etex);
+drawEdgeWithAngle(z1,z0,btex $h$ etex,-145);
+</mpost>
 
 To continue to gain some intuition I will give some degenerated Category examples.
 
