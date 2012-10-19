@@ -141,9 +141,9 @@ From this graph we can conclude without any ambiguity that:
 
 \\[ob(C)=\\{A,B,C\\}\\]
 and
-\\[\hom(C)=\\{f,g,h,idA,idB,idC\\}\\]
+\\[\hom(C)=\\{f,g,h,id_A,id_B,id_C\\}\\]
 
-Instantaneously, we understand that we can get rid of all \\(idX\\) arrows.
+Instantaneously, we understand that we can get rid of all \\(id_i\\) arrows.
 
 But in reality, we lack an important information.
 What is \\(∘\\)?
@@ -182,77 +182,86 @@ label.rt(btex $h = g \circ f$ etex, .5[z5,z6]);
 </mpost>
 
 Now we have a complete representation.
-We don't have to represent \\(idX\\), we know there are there.
-And we also don't have to represent composition implying \\(idX\\) morphisms.
+We don't have to represent \\(id_i\\), we know there are there.
+And we also don't have to represent composition implying \\(id_i\\) morphisms.
 But, even this little graph look complex.
 To show just how complex things can be;
 we just double the number morphisms between different objects.
 
-<graph title="Naïve Category Representation Mess">
+<mpost title="Naïve Category Representation Mess (∘ representation)">
+z0=origin;
+z1=(2gu,gu);
+z2=(4gu,0);
 
-A[pos="0,0!"]
-B[pos="4,0!"]
-C[pos="8,0!"]
-f[pos="2,1!",label="", fixedsize="false", width=0,height=0,shape=none];
-A -> f[label="f", arrowhead=None]
-f -> B
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawState(z2,btex $C$ etex);
 
-fp[pos="2,0.5!",label="", fixedsize="false", width=0,height=0,shape=none];
-A -> fp[label="f'", arrowhead=None]
-fp -> B
+drawEdgeWithAngle(z0,z1,btex $f$ etex,35);
+drawEdge(z0,z1,btex $f'$ etex);
+drawEdgeWithAngle(z1,z2,btex $g$ etex,35);
+drawEdge(z1,z2,btex $g'$ etex);
+drawEdgeWithAngle(z0,z2,btex $h$ etex,-10);
+drawEdgeWithAngle(z0,z2,btex $h'$ etex,-35);
 
-g[pos="6,0.5!",label="", fixedsize="false", width=0,height=0,shape=none];
-B -> g[label="g", arrowhead=None]
-g -> C
+def drawLink(expr f,g,h,l,propf,propg,proph,propfg) =
+    begingroup
+        pair midf,midg,midh,midfg;
+        midf=point propf of f;
+        midg=point propg of g;
 
-gp[pos="6,1!",label="", fixedsize="false", width=0,height=0,shape=none];
-B -> gp[label="g'", arrowhead=None]
-gp -> C
+        path fg; fg:=midf .. midg;
+        draw fg dashed evenly;
 
-fg[pos="6,0!",label="", fixedsize="false", width=0,height=0,shape=none];
-fpg[pos="2.5,-1.5!",label="", fixedsize="false", width=0,height=0,shape=none];
-fgp[pos="5.5,-1.5!",label="", fixedsize="false", width=0,height=0,shape=none];
-fpgp[pos="2,0!",label="", fixedsize="false", width=0,height=0,shape=none];
-AC[pos="4,-1!",label="", fixedsize="false", width=0,height=0,shape=none];
-ApCp[pos="4,-3!",label="", fixedsize="false", width=0,height=0,shape=none];
+        midfg = point propfg of fg;
+        midh = point proph of h;
+        path bigarrow;
+        bigarrow := subpath (.1,.9) of midfg .. midh;
+        drawarrow bigarrow  withpen pencircle scaled 1.5;
 
-f -> fg  [color="red",style=dashed,arrowhead=None]
-fg -> g  [color="red",style=dashed,arrowhead=None]
-fg -> AC [color="red",style=bold,fontcolor="red",label="h=g∘f"]
+        label.rt(l, point .5 of bigarrow);
+    endgroup;
+enddef;
 
-fp -> fpgp [color="yellow",style=dashed,arrowhead=None]
-fpgp -> gp [color="yellow",style=dashed,arrowhead=None]
-fpgp -> AC [color="yellow",style=bold,fontcolor="yellow",label="h=g'∘f'"]
+path f,fp,g,gp,h,hp;
 
-fp -> fpg   [color="blue",style=dashed,arrowhead=None]
-fpg -> g    [color="blue",style=dashed,arrowhead=None]
-fpg -> ApCp [color="blue",style=bold,fontcolor="blue",label="h'=g∘f'"]
-
-f -> fgp    [color="violet",style=dashed,arrowhead=None]
-fgp -> gp   [color="violet",style=dashed,arrowhead=None]
-fgp -> ApCp [color="violet",style=bold,fontcolor="violet",label="h'=g'∘f"]
-
-A -> AC [label="h",arrowhead=None]
-AC -> C
-
-A -> ApCp [label="h'",arrowhead=None]
-ApCp -> C
+f=edgeAngle(z0,z1,35);
+fp=edge(z0,z1);
+g=edgeAngle(z1,z2,35);
+gp=edge(z1,z2);
+h=edgeAngle(z0,z2,-10);
+hp=edgeAngle(z0,z2,-35);
 
 
-</graph>
+drawoptions( withcolor red );
+drawLink(f,g,h,btex $g\circ f$ etex, .5,.5,.4,.3);
+drawoptions( withcolor blue );
+drawLink(fp,gp,h,btex $h=g'\circ f'$ etex, .5,.5,.55,.7);
+drawoptions( withcolor yellow );
+drawLink(f,gp,hp,btex $h'=g'\circ f$ etex, .5,.5,.1,.2);
+drawoptions( withcolor green );
+drawLink(fp,g,hp,btex $h'=g\circ f'$ etex, .5,.5,.9,.8);
 
-By removing the graphical representation of ∘ we could create a more readable representation.
+</mpost>
 
-<graph title="Fewer Details Category Representation">
+Another representation of the preceding category:
 
-A -> B[label="f"]
-A -> B[label="f'"]
-B -> C[label="g"]
-B -> C[label="g'"]
-A -> C [label="h\n=g∘f\n=g'∘f'"]
-A -> C [label="h'\n=g'∘f\n=g∘f'"]
+<mpost title="Another representation">
+z0=origin;
+z1=(2gu,gu);
+z2=(4gu,0);
 
-</graph>
+drawState(z0,btex $A$ etex);
+drawState(z1,btex $B$ etex);
+drawState(z2,btex $C$ etex);
+
+drawEdgeWithAngle(z0,z1,btex $f$ etex,35);
+drawEdge(z0,z1,btex $f'$ etex);
+drawEdgeWithAngle(z1,z2,btex $g$ etex,35);
+drawEdge(z1,z2,btex $g'$ etex);
+drawEdgeWithAngle(z0,z2,btex $h=g\circ f=g'\circ f'$ etex,-10);
+drawEdgeWithAngle(z0,z2,btex $h'=g\circ f'=g'\circ f$ etex,-35);
+</mpost>
 
  ### Examples
 
@@ -264,9 +273,9 @@ z0=(0,0);
 z1=2(u,0);
 z2=2(2u,0);
 
-drawedge(z0,z1,"");
-drawedge(z1,z2,"");
-drawedgeangle(z0,z2,"",50);
+draw edge(z0,z1);
+draw edge(z1,z2);
+draw edgeAngle(z0,z2,50);
 
 drawstate(z0);
 drawstate(z1);
@@ -285,10 +294,10 @@ drawedge(z1,z2,btex $g$ etex);
 z0=(0,0); z1=(4u,0); z2=(2u,-3u);
 drawstate(z0); drawstate(z1); drawstate(z2);
 
-drawedgeangle(z0,z1,"",35);
-drawedgeangle(z1,z0,"",-145);
-drawedge(z0,z2,"");
-drawedge(z1,z2,"");
+draw nl_edgeAngle(z0,z1,35);
+draw nl_edgeAngle(z1,z0,-145);
+draw edge(z0,z2);
+draw edge(z1,z2);
 </mpost>
 
 <mpost title="Not a category; no \(A→C\) while there exists \(A→B\) and \(B→C\)">
@@ -297,10 +306,10 @@ drawState(z0,btex $A$ etex);
 drawState(z1,btex $B$ etex);
 drawState(z2,btex $C$ etex);
 
-drawEdgeWithAngle(z0,z1,"",35);
-drawEdgeWithAngle(z1,z0,"",-145);
-drawEdge(z1,z2,"");
-drawEdge(z2,z0,"");
+draw edgeAngle(z0,z1,35);
+draw edgeAngle(z1,z0,-145);
+draw edge(z1,z2);
+draw edge(z2,z0);
 </mpost>
 
 <graph title="Cannot be a category ; no possible associative ∘<br/>\((h∘g)∘f=idB∘f=f≠h=h∘idA=h∘(g∘f)\)">
